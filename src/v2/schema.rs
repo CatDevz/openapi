@@ -45,7 +45,7 @@ pub struct Spec {
     pub tags: Option<Vec<Tag>>,
     /// Relative paths to the individual endpoints. They must be relative
     /// to the 'basePath'.
-    pub paths: BTreeMap<String, PathItem>,
+    pub paths: BTreeMap<String, BTreeMap<String, Operation>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub definitions: Option<BTreeMap<String, Schema>>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -126,25 +126,25 @@ pub struct License {
 }
 
 /// todo support x-* properties
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
-pub struct PathItem {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub get: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub post: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub put: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub patch: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub delete: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub options: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub head: Option<Operation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub parameters: Option<Vec<ParameterOrRef>>,
-}
+// #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
+// pub struct PathItem {
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub get: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub post: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub put: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub patch: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub delete: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub options: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub head: Option<Operation>,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub parameters: Option<Vec<ParameterOrRef>>,
+// }
 
 /// https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#operation-object
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
