@@ -165,41 +165,6 @@ mod tests {
         (api_filename, parsed_spec_json_str, spec_json_str)
     }
 
-    // Just tests if the deserialization does not blow up. But does not test correctness
-    #[test]
-    fn can_deserialize() {
-        for entry in fs::read_dir("data/v2").unwrap() {
-            let path = entry.unwrap().path();
-            // cargo test -- --nocapture to see this message
-            println!("Testing if {:?} is deserializable", path);
-            from_path(path).unwrap();
-        }
-    }
-
-    #[test]
-    fn can_deserialize_and_reserialize_v2() {
-        let save_path_base: std::path::PathBuf =
-            ["target", "tests", "can_deserialize_and_reserialize_v2"]
-                .iter()
-                .collect();
-
-        for entry in fs::read_dir("data/v2").unwrap() {
-            let path = entry.unwrap().path();
-
-            println!("Testing if {:?} is deserializable", path);
-
-            let (api_filename, parsed_spec_json_str, spec_json_str) =
-                compare_spec_through_json(&path, &save_path_base);
-
-            assert_eq!(
-                parsed_spec_json_str.lines().collect::<Vec<_>>(),
-                spec_json_str.lines().collect::<Vec<_>>(),
-                "contents did not match for api {}",
-                api_filename
-            );
-        }
-    }
-
     #[test]
     fn can_deserialize_and_reserialize_v3() {
         let save_path_base: std::path::PathBuf =
